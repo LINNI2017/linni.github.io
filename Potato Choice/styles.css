@@ -1,0 +1,128 @@
+/*
+    Date: May 4, 2019
+
+    This is the set.css for styles in index.html of potato choice,
+    including some css techniques.
+*/
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Muli|Indie+Flower');
+
+body {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  text-align: center;
+  background-image: url("https://images4.alphacoders.com/211/211736.jpg");
+  background-blend-mode: lighten;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%; 
+}
+
+header {
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 3em;
+}
+
+main *, footer * {
+  font-family: 'Muli', sans-serif;
+}
+
+main * {
+  font-size: 1em;
+}
+
+footer * {
+  color: white;
+  font-size: 0.5em;
+}
+
+footer {
+  margin-top: 10em;
+}
+
+button {
+  margin: 20pt;
+  display: inline;
+  padding: 6pt;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 10%;
+  color: black;
+}
+
+.opac {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.small-title {
+  margin: 0;
+  font-size: 1.3em;
+}
+
+#response h2 {
+  margin-top: 0;
+}
+
+.abs-sec {
+  text-align: center;
+  word-wrap: break-word;
+  width: 35%;
+  margin-left: 45pt;
+}
+
+.info-sec {
+  text-align: right;
+  word-wrap: break-word;
+  width: 25%;
+}
+
+.abs-sec h2 {
+  font-size: 1.3em;
+}
+
+#response section {
+  margin-bottom: 5pt;
+ justify-content: center;
+}
+
+hr {
+  width: 86%;
+  height: 1pt;
+  background-color: #d0e0f6;
+}
+
+#response, #response section, .seq-flex {
+  display: flex;
+}
+
+#response {
+  flex-direction: column;
+}
+
+.seq-flex, #response section {
+  flex-direction: row;
+}
+
+.seq-flex {
+  justify-content: center;
+}
+
+#seq-sec div {
+  margin-left: 10pt;
+}
+
+#submit, #back-main-filter {
+  margin: 0;
+  padding: 1pt;
+}
+
+select, button {
+  border: 1pt solid white;
+  background-color: white;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.5em;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+     Date: May 4, 2019
+     This is the index.html for potato choice web page.
+     It includes random generated movie/tv choice,
+     filtered movie/tv results according to user's selection,
+     each piece of result includes poster picture,
+     overview, simple information of movie/tv.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Potato Choice</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js"></script>
+  </head>
+
+  <body id="body">
+    <header>
+      <h1 id="header-h1">Potato Choice</h1>
+    </header>
+
+    <main>
+      <section id="main-view">
+        <button id="rand-btn">GO RAND!</button>
+        <button id="tv-btn">TV PLAY</button>
+        <button id="mov-btn">MOVIE</button>
+      </section>
+      <section id="res-view" class="hidden">
+
+        <div id="status"></div>
+
+        <section id="seq-sec" class="seq-flex">
+          <div>
+            <button id="back-main-filter">Back To Main</button>
+          </div>
+
+          <div>
+            <select id="sort-asc-mov">
+              <option value="popularity.asc">Popularity ASC</option>
+              <option value="vote_average.asc">Vote Average ASC</option>
+              <option value="vote_count.asc">Vote Count ASC</option>
+              <option value="primary_release_date.asc">Release Date ASC</option>
+              <option value="revenue.asc">Revenue ASC</option>
+            </select>
+          </div>
+
+          <div>
+            <select id="sort-asc-tv">
+              <option value="popularity.asc">Popularity ASC</option>
+              <option value="vote_average.asc">Vote Average ASC</option>
+              <option value="first_air_date.asc">First Air Date ASC</option>
+            </select>
+          </div>
+
+          <div>
+            <select id="rel-yr">
+              <option>2019</option>
+              <option>2018</option>
+              <option>2017</option>
+              <option>2016</option>
+              <option>2015</option>
+            </select>
+          </div>
+
+          <div>
+            <select id="show-num">
+              <option>2</option>
+              <option>4</option>
+              <option>6</option>
+              <option>8</option>
+              <option>10</option>
+            </select>
+          </div>
+
+          <div>
+            <button id="submit">Submit</button>
+          </div>
+        </section>
+
+        <div id="response" class="hidden"></div>
+
+        <div id="rand-sec">
+          <button id="refresh-rand">Refresh</button>
+          <button id="back-main-rand">Back To Main</button>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <article>
+        <h3>Reference:</h3>
+        <p>
+          Created @ LINNI, other sources cited below.
+        </p>
+        <p>
+          The fonts of this page are obtained via <a href="https://fonts.google.com/">
+            Google Font</a>.
+        </p>
+        <p>
+          Data from the <a href="https://www.themoviedb.org/documentation/api">
+            THE MOVIE DB API</a>.
+        </p>
+        <p>
+          The body background image can be found at
+          <a href="https://wall.alphacoders.com/big.php?i=211736">
+            this website</a> via
+          <a href="https://www.google.com/imghp?hl=EN">
+            google image search</a>, is
+          <a href="https://creativecommons.org/licenses/by/2.0/">
+            licensed under CC BY 2.0</a>.
+        </p>
+        <p>
+          The result background image can be found in
+          <a href="https://www.themoviedb.org/documentation/api">
+            THE MOVIE DB API</a> via
+          <a href="https://developers.themoviedb.org/3/getting-started/images">
+            database image search</a>, is
+          <a href="https://creativecommons.org/licenses/by/2.0/">
+            licensed under CC BY 2.0</a>.
+        </p>
+        <p>Note: the results filtered out incomplete results,
+          such as missing poster, empty overview and undefined id.
+        </p>
+      </article>
+    </footer>
+  </body>
+</html>
