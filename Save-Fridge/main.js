@@ -1,5 +1,7 @@
 /**
+ * Name: LINNI CAI
  * Date: May 18, 2019
+ * Section: CSE 154 AO
  * This is the JS to implement the UI for save fridge web page.
  * Allow users to login existed account and register new account.
  * After login successfully,
@@ -21,7 +23,7 @@
   // mode for login and register
   const MODE_LOG = "mode=log";
   // mode for food info
-  const MODE_FOOD = "mode=food";
+  const MODE_SEARCH = "mode=search";
   // base url for food api
   const BASE_URL = "food.php";
   // lower bound of valid status code
@@ -124,6 +126,7 @@
     id("up-food-abs").value = "";
     id("up-food-cal").value = "";
     id("up-food-weight").value = "";
+    id("user-mess").innerText = "";
     hideSec("food-update", false);
     hideSec("food-info", true);
     hideSec("food-up", true);
@@ -136,13 +139,15 @@
    * otherwise report error.
    */
   function upFoodDB() {
+    let mode = "update";
     let food = id("up-food-name").value;
     let abs = id("up-food-abs").value;
     let cal = id("up-food-cal").value;
+
     let weight = id("up-food-weight").value;
     cal = stdCal(cal, weight);
     let data =  new FormData();
-    data.append("mode", "food");
+    data.append("mode", mode);
     data.append("food", food);
     data.append("abs", abs);
     data.append("cal", cal);
@@ -184,7 +189,7 @@
       let food = id("food-" + i).value;
       let weight = id("weight-" + i).value;
       let url = BASE_URL
-        + "?" + MODE_FOOD
+        + "?" + MODE_SEARCH
         + "&food=" + food;
       fetch(url)
       .then(getResponse)
