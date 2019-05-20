@@ -293,9 +293,8 @@
           if ($mode === "search") {
             $mess = "Error: Unknown food.\n";
             repErr($mess);
-          } else {
-            return false;
-          }
+          } 
+          return false;
         }
       } else if ($mode === "log" || $mode === "reg") {
         if (isset($target[0]) && isset($target[1])) {
