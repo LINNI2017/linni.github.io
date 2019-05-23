@@ -1,0 +1,179 @@
+/*
+    Name: LINNI CAI
+    Date: May 18, 2019
+    Section: CSE 154 AO
+    This is the style.css, a style sheet
+    for index.html of save fridge web page.
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Varela+Round');
+
+body, #food-result { 
+  background-blend-mode: lighten;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+}
+
+/*
+original img url("http://pic1.win4000.com/wallpaper/f/58cb99771007c.jpg")
+due to long time loading, use the download img for faster display.
+*/
+body {
+  background-color: rgba(255, 255, 255, 0.5);
+  background-image: url("web_bg.jpg");
+}
+
+/*
+original img url("https://wallpapercave.com/wp/wp1881531.jpg")
+due to long time loading, use the download img for faster display.
+*/
+#food-result {
+  background-color: rgba(255, 255, 255, 0.6);
+  background-image: url("result_bg.jpg");
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50pt;
+  width: 40em;
+  background-size: 70em 100%;
+}
+
+body * {
+  text-align: center;
+}
+
+header, main * {
+  font-family: 'Indie Flower', cursive;
+}
+
+main * {
+  font-size: 1.25em;
+}
+
+footer {
+  margin-top: 35em;
+  font-family: 'Varela Round', sans-serif;
+}
+
+header {
+  font-size: 5em;
+}
+
+header, #food-result {
+  margin-bottom: 0; 
+}
+
+button {
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 0.8em;
+  margin-top: 1.3em;
+}
+
+button, #add-food, .weight-box {
+  border: none;
+  background-color: transparent;
+}
+
+#user-form-input > div {
+  margin-bottom: 1em;
+}
+
+#ques-bar, #user-form-bar, #food-update {
+  display: flex;
+}
+
+#user-form-bar {
+  justify-content: center;
+  align-content: space-between;
+}
+
+#ques-bar {
+  font-size: 2em;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#ques-bar > * > *, header * {
+  margin: 0;
+}
+
+#add-food {
+  padding: 0;
+  margin-left: 25pt;
+  font-size: 2.5em;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.food-box {
+  margin: 10px;
+  margin-right: 0.5em;
+  width: 9em;
+}
+
+.weight-box {
+  margin: 10px;
+  margin-right: 0;
+  width: 2.5em;
+}
+
+#weight-sec-1 {
+  width: 10px;
+}
+
+label {
+  display: inline-block;
+  height: 5px;
+  width: 200px;
+}
+
+#food-list > div {
+  display: block;
+}
+
+#food-list {
+  margin-top: 2em;
+}
+
+.small-title {
+  font-size: 1em;
+}
+
+.err-mess {
+  color: red;
+}
+
+.succ-mess {
+  color: green;
+}
+
+#food-btn button {
+  font-size: 2em;
+}
+
+.cal-show {
+  margin-top: 20pt;
+  font-size: 0.8em;
+}
+
+#food-update {
+  flex-direction: column;
+}
+
+#food-update input {
+  width: 10em;
+  margin-bottom: 20pt;
+}
+
+#food-update h2 {
+  font-size: 2em;
+}
+
+#user-mess {
+  font-size: 2em; 
+}
