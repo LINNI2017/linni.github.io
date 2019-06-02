@@ -10,7 +10,7 @@ https://courses.cs.washington.edu/courses/cse154/19sp/creative/cp3/dynomutt/inde
 
 ## Save Fridge (Food Database API)
 http://savefridge.epizy.com/ (web server database storage) [SQL, PDO, USDA food table and personal edit table]
-https://courses.cs.washington.edu/courses/cse154/19sp/creative/cp4/beau/index.html (web server file storage) [This one requires UW netid]
+https://courses.cs.washington.edu/courses/cse154/19sp/creative/cp4/beau/index.html (web server file storage) [Requires UW netid]
 
 
 
