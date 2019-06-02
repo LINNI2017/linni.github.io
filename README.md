@@ -14,5 +14,7 @@ http://savefridge.epizy.com/
 https://courses.cs.washington.edu/courses/cse154/19sp/creative/cp4/beau/index.html   
 ### (web server file storage) [Requires UW netid]
 
+**safari doesn't support some features**
+
 
 
