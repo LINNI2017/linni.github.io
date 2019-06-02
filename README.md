@@ -16,7 +16,7 @@ https://courses.cs.washington.edu/courses/cse154/19sp/creative/cp4/beau/index.ht
 http://savefridge.epizy.com/   
 #### (web server database storage) [SQL, PDO, USDA food table and personal edit table]   
    
-- safari doesn't support some features
+* safari doesn't support some features
 
 
 
