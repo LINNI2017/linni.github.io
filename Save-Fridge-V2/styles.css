@@ -1,0 +1,306 @@
+/*
+    Name: LINNI CAI
+    Date: May 30, 2019
+    Section: CSE 154 AO
+    This is the style.css, a style sheet
+    for index.html of save fridge web page.
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Varela+Round');
+
+body, #food-calc-result, #food-single-search-result, #food-update-result { 
+  background-blend-mode: lighten;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+}
+
+/*
+original img url("http://pic1.win4000.com/wallpaper/f/58cb99771007c.jpg")
+due to long time loading, use the download img for faster display.
+*/
+body {
+  background-color: rgba(255, 255, 255, 0.5);
+  background-image: url("web_bg.jpg");
+}
+
+/*
+original img url("https://wallpapercave.com/wp/wp1881531.jpg")
+due to long time loading, use the download img for faster display.
+*/
+#food-calc-result, #food-single-search-result, #food-update-result {
+  background-color: rgba(255, 255, 255, 0.6);
+  background-image: url("result_bg.jpg");
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50pt;
+  width: 40em;
+}
+
+#food-calc-result {
+  background-size: 50.9em 100%;
+}
+
+#food-single-search-result, #food-update-result {
+  background-size: 58.9em 100%;
+}
+
+body * {
+  text-align: center;
+}
+
+header, main * {
+  font-family: 'Indie Flower', cursive;
+}
+
+main * {
+  font-size: 1.15em;
+}
+
+footer {
+  margin-top: 40em;
+  font-family: 'Varela Round', sans-serif;
+}
+
+header {
+  font-size: 5em;
+}
+
+header, #food-calc-result {
+  margin-bottom: 0; 
+}
+
+button {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 0;
+  margin-top: 1.5em;
+}
+
+#multi-btn-bar button {
+  margin-right: 0;
+  margin-left: 2em;
+  margin-bottom: 0;
+  margin-top: 1.3em;
+}
+
+#food-main-btn-bar button {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+button, #add-food, .weight-box {
+  border: none;
+  background-color: transparent;
+}
+
+#add-food {
+  padding: 0;
+  margin-left: 25pt;
+  font-size: 2.5em;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  height: 5px;
+  width: 200px;
+}
+
+#food-list > div {
+  display: block;
+}
+
+#food-list {
+  margin-top: 2em;
+}
+
+.small-title {
+  margin-top: 0.8em;
+  margin-bottom: 0;
+  font-size: 1em;
+}
+
+.err-mess {
+  color: red;
+}
+
+.succ-mess {
+  color: green;
+}
+
+.cal-show {
+  margin-top: 20pt;
+  font-size: 0.8em;
+}
+
+h2, #mmess, .big-btn button {
+  font-size: 2em;
+}
+
+#food-search-multi > div > div {
+  display: inline-block;
+  margin-left: 0;
+  margin-bottom: 20pt;
+}
+
+#user-main-input > div > * {
+  margin-bottom: 20pt;
+}
+
+.width-7 select, .width-7 input {
+  width: 7em;
+}
+
+.width-20 select, .width-20 input {
+  width: 20%;
+}
+
+.width-30 select, .width-30 input {
+  width: 30%;
+}
+
+.width-100 select {
+  width: 100%;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.width-35 {
+  width: 35%;
+}
+
+.width-20 select, .width-20 input,
+.width-30 select, .width-30 input, 
+.width-7 select, .width-7 input,
+.width-100 select {
+  border-radius: 5px;
+  border: 0;
+}
+
+.food-box {
+  margin: 10px;
+  margin-right: 0.5em;
+  width: 9em;
+}
+
+.weight-box {
+  margin-left: 10pt;
+  margin-right: 0;
+  width: 2.5em;
+}
+
+.weight-label {
+  width: 30pt;
+}
+
+#food-search-multi > div * {
+  font-size: 1em;
+}
+
+.margin-right-20 {
+  margin-right: 20px;
+}
+
+.float-left {
+  float: left;
+  width: 50%;
+}
+
+.float-right {
+  float: right;
+  width: 50%;
+}
+
+#food-search-multi label {
+  width: 4em;
+}
+
+#food-search-type-bar {
+  width: 80%;
+}
+
+#food-search-type-bar, #user-main-btn-bar, #food-main-btn-bar {
+  width: 60%;
+  margin: auto;
+}
+
+#cal-ques-bar > div {
+  display: inline-block;
+  margin: 0;
+}
+
+#add-food {
+  font-size: 3em;
+  margin: 0;
+  margin-left: 20pt;
+}
+
+#user-main-btn-bar button {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.small-btn {
+  font-size: 1.6em;
+}
+
+#title {
+  margin-bottom: 0;
+}
+
+#user-main-bar {
+  margin: auto;
+}
+  
+#user-main-bar button {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0.8em;
+  margin-bottom: 1em;
+}
+
+table {
+  width: 80%;
+  margin: auto;
+  font-size: 18pt;
+}
+
+td, th {
+  padding: 10pt;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #eadfd2;
+}
+
+#forget-pass-btn {
+  font-size: 1em;
+  margin: 0;
+}
+
+#user-mess {
+  margin-top: 1em;
+  font-size: 1.75em;
+}
+
+select, input {
+  margin-bottom: 2%;
+}
+
+select {
+  border: none;
+}
+
+.bar button {
+  font-size: 1.5em;
+}

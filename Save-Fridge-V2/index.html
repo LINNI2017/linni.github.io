@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--
+     Name: LINNI CAI
+     Date: May 30, 2019
+     Section: CSE 154 AO
+     This is the index.html for save fridge web page.
+     It includes login, register, food nutrient search, 
+     food database update, calories calculation.
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Save Fridge</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="index.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1 id="title">Save Fridge</h1>
+    </header>
+
+    <main>
+      <form id="user-main" class="hidden">
+        <section id="user-main-bar" class="big-btn width-50">
+          <div class="float-left">
+            <button type="button" id="login">
+              Login
+            </button>
+          </div>
+
+          <div class="float-right">
+            <button type="button" id="register">
+              Register
+            </button>
+          </div>
+        </section>
+
+        <section id="user-main-input" class="hidden width-20">
+          <div>
+            <label for="user-name">Username </label>
+            <input type="text" id="user-name" name="name" required/>
+          </div>
+
+          <div>
+            <label for="user-pass">Password </label>
+            <input type="text" id="user-pass" name="pass" required/>
+          </div>
+          <div id="reg-secu-ques-div" class="hidden">
+            <label for="forget-secu-ques">Question </label>
+            <select id="reg-secu-ques">
+              <option value ="secu-ques-def" selected="selected">Select One Question</option>
+              <option value ="favor_city">Favorite City</option>
+              <option value ="favor_class">Favorite Class</option>
+              <option value="favor_flavor">Favorite Flavor</option>
+              <option value="favor_char">Favorite Character</option>
+            </select>
+          </div>
+          <div id="reg-secu-ans" class="hidden">
+            <label for="forget-secu-ans">Answer </label>
+            <input type="text" id="reg_favor_city" pattern="[a-z ]i+"
+            name="reg_favor_city" class="secu-ans" 
+            value="Ningbo" required/>
+            <input type="text" id="reg_favor_class" pattern="[a-z ]i+"
+            name="reg_favor_class" class="secu-ans hidden" 
+            value="CSE" required/>
+            <input type="text" id="reg_favor_flavor" pattern="[a-z ]i+"
+            name="reg_favor_flavor" class="secu-ans hidden" 
+            value="Chocolate" required/>
+            <input type="text" id="reg_favor_char" pattern="[a-z ]i+"
+            name="reg_favor_char" class="secu-ans hidden" 
+            value="Antibacterial" required/>
+          </div> 
+        </section> 
+
+        <section id="user-main-btn-bar" class="big-btn">
+          <div>
+            <button type="button" id="log-submit" class="hidden">
+              Login
+            </button>
+          </div>
+
+          <div>
+            <button type="button" id="forget-pass-btn" class="hidden">
+              Forget Password?
+            </button>
+          </div>
+
+          <div>
+            <button type="button" id="reg-submit" class="hidden">
+              Register
+            </button>
+          </div>  
+        </section>      
+      </form>
+
+      <section id="forget-pass" class="hidden width-20">
+        <h2>Please Answer the following Security Question</h1>
+        <div>
+          <div>
+            <label for="forget-user-name">Username </label>
+            <input type="text" id="forget-user-name" name="name" required/>
+          </div>
+
+          <div>
+            <label for="forget-user-pass" class="reset-user-pass">Password </label>
+            <input type="text" id="forget-user-pass" name="pass" class="reset-user-pass hidden" required/>
+          </div>
+
+          <div>
+            <label for="forget-secu-ques">Question </label>
+            <select id="forget-secu-ques">
+              <option value ="secu-ques-def" selected="selected">Select One Question</option>
+              <option value ="favor_city">Favorite City</option>
+              <option value ="favor_class">Favorite Class</option>
+              <option value="favor_flavor">Favorite Flavor</option>
+              <option value="favor_char">Favorite Character</option>
+            </select>
+          </div>
+          <div id="forget-secu-ans" class="hidden">
+            <label for="forget-secu-ans">Answer </label>
+            <input type="text" id="forget_favor_city" pattern="[a-z ]i+"
+            name="favor_city" value="" required/>
+            <input type="text" id="forget_favor_class" pattern="[a-z ]i+"
+            name="favor_class" value="" required/>
+            <input type="text" id="forget_favor_flavor" pattern="[a-z ]i+"
+            name="favor_flavor" value="" required/>
+            <input type="text" id="forget_favor_char" pattern="[a-z ]i+"
+            name="favor_char" value="" required/>
+          </div>
+        </div>  
+        <div class="bar">
+          <button type="button" id="forget-submit-btn">
+            Submit
+          </button>
+          <button type="button" id="forget-update-btn" class="reset-user-pass hidden">
+            Update
+          </button>
+          <button type="button" id="forget-back-btn">
+            Back
+          </button>
+        </div>
+      </section>
+
+      <section id="user-mess-sec" class="hidden">
+        <p id="user-mess"></p>
+      </section>
+    </main>
+
+    <footer>
+      <article>
+        <h3>Note:</h3>
+        <p>
+          Use Chrome to have optimal page view (scale: 100%).
+        </p>
+        <p>
+          For each recorded food, default weight is 100g and calories per 100g. Use + to add more food.
+        </p>
+      </article>
+      <article>
+        <h3>Reference:</h3>
+        <p>
+          Created @ LINNI, other sources cited below.
+        </p>
+        <p>
+          The fonts of this page can be found via <a href="https://fonts.google.com/">
+            Google Font </a>.
+        </p>
+        <p>
+          Alpaca Emoji can be found at <a href="http://sc.chinaz.com/biaoqing/121202335870.htm">
+          this website</a> via <a href="https://www.google.com/imghp?hl=EN">
+          google image search</a>, is <a href="https://creativecommons.org/licenses/by/2.0/">
+          licensed under CC BY 2.0</a>.
+        </p>
+        <p>
+          The body background image can be found at
+          <a href="http://www.win4000.com/wallpaper_detail_124087_2.html">
+            this website</a> via
+          <a href="https://www.google.com/imghp?hl=EN">
+            google image search</a>, is
+          <a href="https://creativecommons.org/licenses/by/2.0/">
+            licensed under CC BY 2.0</a>.
+        </p>
+        <p>
+          The result background image can be found at
+          <a href="https://wallpapercave.com/vegetables-wallpapers">
+            this website</a> via
+          <a href="https://www.google.com/imghp?hl=EN"> google image search</a>, is
+          <a href="https://creativecommons.org/licenses/by/2.0/">
+            licensed under CC BY 2.0</a>.
+        </p>
+        <p>
+          Fruit and vegetable list information, can be found in 
+          <a href="https://www.betterhealth.vic.gov.au/health/healthyliving/fruit-and-vegetables">
+          this website</a>; meat list information can be found in 
+          <a href="https://foodandnutrition.org/january-february-2013/color-confusion-identifying-red-meat-white-meat/">
+          this website</a>.
+        </p>
+        <p>
+          Nutrition information, such as calories information, can be found
+          in <a href="https://fdc.nal.usda.gov/">USDA Food Data Central</a>, 
+          <a href="https://ndb.nal.usda.gov/ndb/">USDA Food Compostion Database</a>, 
+          <a href="https://www.who.int/elena/nutrient/en/">WHO e-Library</a>.
+        </p>
+      </article>
+    </footer>
+  </body>
+</html>
