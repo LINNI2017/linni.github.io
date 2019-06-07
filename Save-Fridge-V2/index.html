@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
      Name: LINNI CAI
-     Date: May 30, 2019
+     Date: June 5, 2019
      Section: CSE 154 AO
      This is the index.html for save fridge web page.
      It includes login, register, food nutrient search, 
@@ -22,8 +22,8 @@
     </header>
 
     <main>
-      <form id="user-main" class="hidden">
-        <section id="user-main-bar" class="big-btn width-50">
+      <form id="user-main">
+        <section id="user-main-bar" class="big-btn width-40">
           <div class="float-left">
             <button type="button" id="login">
               Login
@@ -48,7 +48,7 @@
             <input type="text" id="user-pass" name="pass" required/>
           </div>
           <div id="reg-secu-ques-div" class="hidden">
-            <label for="forget-secu-ques">Question </label>
+            <label for="reg-secu-ques">Question </label>
             <select id="reg-secu-ques">
               <option value ="secu-ques-def" selected="selected">Select One Question</option>
               <option value ="favor_city">Favorite City</option>
@@ -58,19 +58,15 @@
             </select>
           </div>
           <div id="reg-secu-ans" class="hidden">
-            <label for="forget-secu-ans">Answer </label>
+            <label for="reg-secu-ans">Answer </label>
             <input type="text" id="reg_favor_city" pattern="[a-z ]i+"
-            name="reg_favor_city" class="secu-ans" 
-            value="Ningbo" required/>
+            name="reg_favor_city" class="secu-ans" required/>
             <input type="text" id="reg_favor_class" pattern="[a-z ]i+"
-            name="reg_favor_class" class="secu-ans hidden" 
-            value="CSE" required/>
+            name="reg_favor_class" class="secu-ans hidden" required/>
             <input type="text" id="reg_favor_flavor" pattern="[a-z ]i+"
-            name="reg_favor_flavor" class="secu-ans hidden" 
-            value="Chocolate" required/>
+            name="reg_favor_flavor" class="secu-ans hidden" required/>
             <input type="text" id="reg_favor_char" pattern="[a-z ]i+"
-            name="reg_favor_char" class="secu-ans hidden" 
-            value="Antibacterial" required/>
+            name="reg_favor_char" class="secu-ans hidden" required/>
           </div> 
         </section> 
 
@@ -82,21 +78,42 @@
           </div>
 
           <div>
+            <button type="button" id="reg-submit" class="hidden">
+              Register
+            </button>
+          </div>  
+
+          <div class="acc-op">
             <button type="button" id="forget-pass-btn" class="hidden">
               Forget Password?
             </button>
           </div>
 
-          <div>
-            <button type="button" id="reg-submit" class="hidden">
-              Register
+          <div class="acc-op">
+            <button type="button" id="delete-acc-btn" class="hidden">
+              Wanna Delete Account?
             </button>
-          </div>  
+          </div>
         </section>      
       </form>
 
+      <section id="delete-acc" class="hidden width-20">
+        <h2>Please Confirm to Delete Your Account</h2>
+        <div>
+          <div>
+            <label for="delete-user-name">Username </label>
+            <input type="text" id="delete-user-name" name="name" required/>
+          </div>
+
+          <div>
+            <label for="delete-user-pass" class="reset-user-pass">Password </label>
+            <input type="text" id="delete-user-pass" name="pass" required/>
+          </div>
+        </div>
+      </section>
+
       <section id="forget-pass" class="hidden width-20">
-        <h2>Please Answer the following Security Question</h1>
+        <h2>Please Answer the following Security Question</h2>
         <div>
           <div>
             <label for="forget-user-name">Username </label>
@@ -121,16 +138,291 @@
           <div id="forget-secu-ans" class="hidden">
             <label for="forget-secu-ans">Answer </label>
             <input type="text" id="forget_favor_city" pattern="[a-z ]i+"
-            name="favor_city" value="" required/>
+            name="favor_city" required/>
             <input type="text" id="forget_favor_class" pattern="[a-z ]i+"
-            name="favor_class" value="" required/>
+            name="favor_class" required/>
             <input type="text" id="forget_favor_flavor" pattern="[a-z ]i+"
-            name="favor_flavor" value="" required/>
+            name="favor_flavor" required/>
             <input type="text" id="forget_favor_char" pattern="[a-z ]i+"
-            name="favor_char" value="" required/>
+            name="favor_char" required/>
           </div>
-        </div>  
-        <div class="bar">
+        </div>
+      </section>
+
+      <section id="food-main">
+        <section id="food-main-btn-bar" class="big-btn hidden">
+          <div class="float-left">
+            <button type="button" id="food-calc-btn">
+              Calculate
+            </button>
+          </div>
+          
+          <div class="float-right">
+            <button type="button" id="food-up-btn">
+              Update
+            </button>
+          </div>
+
+          <div class="float-left">
+            <button type="button" id="food-single-search-btn">
+              Single Search
+            </button>
+          </div>
+
+          <div class="float-right">
+            <button type="button" id="food-multi-search-btn">
+              Multi Search
+            </button>
+          </div>
+        </section>
+
+        <section id="food-calc" class="hidden">
+          <div id="cal-ques-bar">
+            <div>
+              <h2 id="food-calc-ques">
+                Anything in Your Fridge?
+              </h2>
+            </div>
+
+            <div>
+              <button type="button" id="add-food">
+                +
+              </button>
+            </div>
+          </div>
+
+          <form id="food-calc-input" class="hidden"></form>
+        </section>
+
+        <section id="calc-result-sec" class="hidden">
+          <div> 
+            <h2>
+              Calculate Result
+            </h2>
+          </div>
+          <section id="cal-sec" class="hidden">
+            <p class="cal-show">Total Calories: </p>
+            <p id="cal" class="cal-show">0</p>
+          </section>
+          <div id="food-calc-result"></div>
+        </section>
+
+        <section id="food-update" class="hidden width-30">
+          <div>
+            <h2>
+              Update Food Database
+            </h2>
+          </div>
+
+          <div>
+            <label for="food-up-name">Food Name</label>
+            <input type="text" id="food-up-name" 
+              name="food-name" pattern="[a-z ]i+" maxlength=30 
+              value="Apple" required/>
+          </div>
+
+          <div>
+            <label for="food-up-abs">Abstract</label>
+            <input type="text" id="food-up-abs" 
+              name="food-abs" pattern="[a-z ]i+" maxlength=100 
+              value="Sweet & Crispy & Daily Fruit Choice" required/>
+          </div>
+
+          <div>
+            <label for="food-up-cal">Calories</label>
+            <input type="number" id="food-up-cal" 
+              name="food-cal" min=1 max=9999 value=52 required/>
+          </div>
+
+          <div>
+            <label for="food-up-weight">Weight (g)</label>
+            <input type="number" id="food-up-weight" 
+              name="food-weight" min=1 max=9999 value=100 required/>
+          </div>
+        </section>
+
+        <section id="food-search">
+          <section id="food-search-single" class="hidden width-20">
+            <div>
+              <h2>
+                Look up Nutrition Information
+              </h2>
+            </div>
+
+            <div>
+              <label for="single-name">Food</label>
+              <input type="text" id="single-name" 
+                name="food-name" pattern="[a-zA-Z ]+" 
+                value="apple" required/>
+            </div>
+          </section>
+
+          <section id="food-search-multi" class="hidden width-7">
+            <h2>Nutrients Ranking</h2>
+
+            <div>
+              <div>     
+                <label for="food-search-type">Table</label>
+              </div>
+              <div>
+                <select id="multi-type">
+                  <option value ="Grocery" selected="selected">Grocery</option>
+                  <option value ="Restaurant">Restaurant</option>
+                  <option value="Common">Common</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <label for="multi-show">Show</label>
+              </div>
+
+              <div>
+                <input type="number" id="multi-show" 
+                name="multi-show" min=1 max=30 value=5 required/>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <label for="multi-cal-min">Cal Min</label>
+              </div>
+
+              <div>
+                <input type="number" id="multi-cal-min" 
+                name="multi-cal-min" min=1 max=9999 value=10 required/>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <label for="multi-cal-max">Cal Max</label>
+              </div>
+
+              <div>
+                <input type="number" id="multi-cal-max" 
+                name="multi-cal-max" min=1 max=9999 value=1000 required/>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <label for="multi-key">Key Word</label>
+              </div>
+
+              <div>
+                <input type="text" id="multi-key" 
+                name="multi-key" pattern="[a-z ]i+" maxlength=30 value="beef" required/>
+              </div>
+            </div>
+
+            <div>
+              <div>     
+                <label for="food-search-macro">Macro</label>
+              </div>
+              <div class="margin-right-20">
+                <select id="multi-macro">
+                  <option value ="nf_total_carbohydrate" selected="selected">
+                    Carbohydrate
+                  </option>
+                  <option value ="nf_protein">Protein</option>
+                  <option value="nf_total_fat">Fat</option>
+                </select>
+              </div>
+              <div class="width-100">
+                <select id="macro-order">
+                  <option value ="asc" selected="selected">ASC</option>
+                  <option value="desc">DESC</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <div>     
+                <label for="food-search-micro">Micro</label>
+              </div>
+              <div class="margin-right-20">
+                <select id="multi-micro">
+                  <option value ="nf_sugars" selected="selected">Sugar</option>
+                  <option value ="nf_sodium">Sodium</option>
+                  <option value ="nf_cholesterol">Cholesterol</option>
+                  <option value ="nf_vitamin_a_dv">Vitamin A</option>
+                  <option value ="nf_vitamin_c_dv">Vitamin C</option>
+                  <option value ="nf_calcium_dv">Calcium</option>
+                  <option value ="nf_iron_dv">Iron</option>    
+                </select>
+              </div>
+              <div class="width-100">
+                <select id="micro-order">
+                  <option value ="asc" selected="selected">ASC</option>
+                  <option value="desc">DESC</option>
+                </select>
+              </div>
+            </div>
+          </section>
+          <section id="food-multi-search-result" class="hidden"></section>
+          <section id="food-single-search-result" class="hidden"></section> 
+          <section id="food-update-result" class="hidden"></section>
+        </section>     
+      </section>
+
+      <div class="big-btn">
+        <section id="food-calc-btn-bar" class="bar hidden">
+          <button type="button" id="calc-submit-btn">
+            Submit 
+          </button>
+          <button type="button" id="calc-back-btn">
+            Back 
+          </button>
+          <button type="button" id="calc-refresh-btn">
+            Refresh
+          </button>
+        </section>
+
+        <section id="food-up-btn-bar" class="bar hidden">
+          <button type="button" id="food-up-add-btn">
+            Add 
+          </button>
+          <button type="button" id="food-up-update-btn" class="hidden">
+            Update 
+          </button>
+          <button type="button" id="food-up-delete-btn">
+            Delete 
+          </button>
+          <button type="button" id="food-up-back-btn">
+            Back 
+          </button>
+          <button type="button" id="food-up-refresh-btn">
+            Refresh
+          </button>
+        </section>
+
+        <section id="single-btn-bar" class="bar hidden">
+          <button type="button" id="single-search-btn">
+            Search 
+          </button>
+          <button type="button" id="single-back-btn">
+            Back 
+          </button>
+          <button type="button" id="single-refresh-btn">
+            Refresh
+          </button>
+        </section>          
+
+        <section id="multi-btn-bar" class="bar hidden">
+          <button type="button" id="multi-search-btn">
+            Search 
+          </button>
+          <button type="button" id="multi-back-btn">
+            Back 
+          </button>
+          <button type="button" id="multi-refresh-btn">
+            Refresh
+          </button>
+        </section>
+
+        <section id="forget-btn-bar" class="bar hidden">
           <button type="button" id="forget-submit-btn">
             Submit
           </button>
@@ -140,10 +432,25 @@
           <button type="button" id="forget-back-btn">
             Back
           </button>
-        </div>
-      </section>
+        </section>
 
-      <section id="user-mess-sec" class="hidden">
+        <section id="delete-btn-bar" class="bar hidden">
+          <button type="button" id="delete-submit-btn">
+            Delete
+          </button>
+          <button type="button" id="delete-back-btn">
+            Back
+          </button>
+        </section>
+      </div>
+      <div>
+        <section class="big-btn">
+          <button type="button" id="log-out" class="hidden">
+            Log Out
+          </button>
+        </section>
+      </div>
+      <section id="user-mess-sec" class="hidden big-btn">
         <p id="user-mess"></p>
       </section>
     </main>
@@ -174,6 +481,10 @@
           licensed under CC BY 2.0</a>.
         </p>
         <p>
+          Nutrition information with professional database in multi-search, can be found in 
+          <a href="https://www.nutritionix.com/database/">Nutritionix Database</a>.
+        </p>
+        <p>
           The body background image can be found at
           <a href="http://www.win4000.com/wallpaper_detail_124087_2.html">
             this website</a> via
@@ -196,10 +507,10 @@
           this website</a>; meat list information can be found in 
           <a href="https://foodandnutrition.org/january-february-2013/color-confusion-identifying-red-meat-white-meat/">
           this website</a>.
-        </p>
+        </p> 
         <p>
-          Nutrition information, such as calories information, can be found
-          in <a href="https://fdc.nal.usda.gov/">USDA Food Data Central</a>, 
+          Nutrition information in single-search, can be found in 
+          <a href="https://fdc.nal.usda.gov/">USDA Food Data Central</a>, 
           <a href="https://ndb.nal.usda.gov/ndb/">USDA Food Compostion Database</a>, 
           <a href="https://www.who.int/elena/nutrient/en/">WHO e-Library</a>.
         </p>

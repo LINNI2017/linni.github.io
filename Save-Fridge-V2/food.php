@@ -1,53 +1,34 @@
 <?php
 /*
  * Name: LINNI CAI
- * Date: May 30, 2019
+ * Date: June 6, 2019
  * Section: CSE 154 AO
- * This is the food.php web service to demonstrate basic
- * GET and POST parameter. Search user and food data.
+ * This is the food.php web service to demonstrate basic POST parameter. 
+ * API to search user account and food data.
  *
  * Web service details:
  *
- *   Possible GET parameters:
- *     - mode = log
- *     - name, pass
+ *   Possible POST parameters:
+ *     - base = user
+ *     - mode = log/reg/update/search/delete
+ *
+ *   Possible Required parameters:
+ *     - log: name, pass
+ *     - reg: name, pass, ques, ans
+ *     - update: name, pass, ques, ans
+ *     - search: name, ques, ans
+ *     - delete: name, pass
  *
  *   Possible POST parameters:
- *     - mode = reg
- *     - name, pass
- *   
- *   Possible GET parameters:
- *     - mode = search
- *     - name
+ *     - base = food
+ *     - mode = add/update/delete/ssearch/msearch
  *
- *   Possible GET parameters:
- *     - mode = search
- *     - type = user
- *     - name
- *     - ques
- *     - ans
- *
- *   Possible GET parameters:
- *     - mode = search
- *     - type = single
- *     - name
- *
- *   Possible GET parameters:
- *     - mode = search
- *     - type = multi
- *     - table, show, macro, micro, min, max, key
- *
- *   Possible POST parameters:
- *     - mode = update
- *     - mode = food
- *     - name, abs, cal
- *
- *   Possible POST parameters:
- *     - mode = update
- *     - mode = user
- *     - pass, ques, ans
- *
- *   Possible mode: log/reg/search/update
+ *   Possible Required parameters:
+ *     - add: name, abs, cal
+ *     - update: name, abs, cal
+ *     - delete: name
+ *     - ssearch: name
+ *     - msearch: table, show, macro, maorder, micro, miorder, min, max, key
  *
  *   Output Format:
  *     - TXT
@@ -57,228 +38,122 @@
   include("common.php");
 
   error_reporting(E_ALL);
-  get_mode();
+  base_post();
 
   /**
-   * Check mode, return mode if it's successful,
-   * otherwise return null and report error.
-   * @return {string} current mode.
+   * Check base and check required mode.
    */
-  function get_mode() {
-    $mess = "";
-    if (isset($_GET["mode"])) {
-      $mode = $_GET["mode"];
-    } else if (isset($_POST["mode"])) {
-      $mode = $_POST["mode"];
-    }
-    mode_check($mode);
-    target_check($mode);
-  }
-
-  /**
-   * Check target in the given mode.
-   * @param {string} mode - current mode.
-   */
-  function target_check($mode) {
-    check_para(array($mode), "target_check");
-    if ($mode === "reg") {
-      reg_post();
-    } else if ($mode === "log") {
-      log_get();
-    } else if ($mode === "search") {
-      search_get();
-    } else if ($mode === "update") {
-      update_post();
-    }
-  }
-
-  /**
-   * Update food through fetching post,
-   * check user input and report any error.
-   */
-  function update_post() {
-    $db = get_PDO();
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    checkPost("type");
-    $type = strtolower($_POST["type"]);
-    update_type_check($type);
-    if ($type === "user") {
-      update_user($db);
+  function base_post() {
+    check_post("base");
+    $base = $_POST["base"];
+    base_check($base);
+    check_post("mode");
+    $mode = $_POST["mode"];
+    if ($base === "user") {
+      user_mode_check($mode);
+      user_target_check($mode);
     } else {
-      update_food($db);
-    } 
+      food_mode_check($mode);
+      food_target_check($mode);
+    }
   }
 
-  function update_user($db) {
-    update_user_check();
-    $name = $_POST["name"];
-    $pass = $_POST["pass"];
-    $ques = $_POST["ques"];
-    $ans = $_POST["ans"];
-    check_text($name, "User Name");
-    check_text($pass, "User Password");
-    check_text($ques, "Security Question");
-    check_text($ans, "Security Question Answer");
-    $para = array("name" => $name,
-                  "pass" => $pass,
-                  "ques" => $ques,
-                  "ans" => $ans);
-    update_my_user($db, $para);
+  /**
+   * Check parameters for the given mode.
+   * @param {string} $mode - a string represents a mode
+   */
+  function food_target_check($mode) {
+    if ($mode === "add") {
+      food_add_post();
+    } else if ($mode === "update") {
+      food_update_post();
+    } else if ($mode === "ssearch") {
+      food_ssearch_post();
+    } else if ($mode === "msearch") {
+      food_msearch_post();
+    } else { // mode = delete
+      food_delete_post();
+    }
   }
 
-  function update_food($db) {
-    update_food_check();
+  /**
+   * Check food info validity and return it in an array.
+   * @param {array} an array of food info
+   */
+  function food_info_check() {
+    check_post("name");
+    check_post("abs");
+    check_post("cal");
     $name = strtolower($_POST["name"]);
-    $abs = strtolower($_POST["abs"]);
-    $cal = strtolower($_POST["cal"]);
-    $cover = strtolower($_POST["cover"]); // yes/no
+    $abs = $_POST["abs"];
+    $cal = $_POST["cal"];
     check_text($name, "Food Name");
     check_text($abs, "Food Abstract");
-    check_num($cal, "Food Calories Number");
-    if ($cover !== "yes" && $cover !== "no") {
-      $mess = "PHP Error: Invalid Cover Parameter, must be YES/NO.";
-      rep_err($mess);
-    } else {
-      $row_find = find_my_food($db, $name);
-      $para = array("name" => $name, 
-                    "abs" => $abs, 
-                    "cal" => $cal);
-      update_food_exec($db, $cover, $row_find, $para);
-    }
-  }
-
-  function update_user_check() {  
-    checkPost("name");
-    checkPost("pass");
-    checkPost("ques");
-    checkPost("ans");
+    check_num($cal, "Food Calories");
+    return array("name" => $name, 
+                 "abs" => $abs, 
+                 "cal" => $cal);
   }
 
   /**
-   * Check if user input in update section is NULL,
-   * report error for any NULL input.
+   * Check food existence and insert new food,
+   * report error for existed food, or invalid food info.
    */
-  function update_food_check() {  
-    checkPost("name");
-    checkPost("abs");
-    checkPost("cal");
-    checkPost("cover");
+  function food_add_post() {
+    $para = food_info_check();
+    $name = $para["name"];
+    item_exist_check($name, "Food", true);
+    insert_my_food($para);
   }
 
   /**
-   * Update or add food through fetching post,
-   * or print out existed food info.
-   * @param {PDO} $db - a PDO of food database
-   * @param {string} $cover - yes to override existed record,
-   *                          no to print out existed record
-   * @param {array} $row_find - an array of found rows
-   * @param {array} $para - an array of user input
+   * Check food existence and update existed food,
+   * report error for unknown food, or invalid food info.
    */
-  function update_food_exec($db, $cover, $row_find, $para) {
-    if ($row_find) {
-      if ($cover === "yes") {
-        update_my_food($db, $para);
-      } else {
-        echo_info($row_find);
-      }
-    } else { // new food
-      insert_my_food($db, $para);
-    }
+  function food_update_post() {
+    $para = food_info_check();
+    $name = $para["name"];
+    item_exist_check($name, "Food", false);
+    update_my_food($para);
   }
 
   /**
-   * Search food in the local or professional table,
-   * check if user input is NULL, report error for any NULL input.
+   * Check food existence and delete existed food,
+   * report error for unknown food, or invalid food info.
    */
-  function search_get() {
-    $db = get_PDO();
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $type = NULL;
-    $row_find = NULL;
-    checkGet("type");
-    $type = strtolower($_GET["type"]);
-    search_type_check($type);
-    if ($type === "user") {
-      $row_find = search_user($db);
-      search_check($row_find, "User");
-      $mess = "Success: Valid Security QA, use Update for your new User Password.";
-      rep_ok($mess);      
-    } else {
-      if ($type === "single") { // search in myfood
-        $row_find = search_single($db);
-      } else { // type = multiple, search in prof food db
-        $row_find = search_multi($db);
-      }
-      search_check($row_find, "Food");
-    }
-  }
-
-  function search_user($db) {
-    checkGet("name");
-    $name = $_GET["name"];
-    check_text($name, "User Name");
-    return find_my_user($db, $name);
-  }
-
-  /**
-   * Check search result, print out found food result,
-   * report error for unknown food.
-   * @param {array} $row_find - an array of found rows
-   */
-  function search_check($row_find, $type) {
-    if (!$row_find) {
-      $mess = "Error: No Matched $type in the Database.";
-      rep_err($mess);
-    } else if ($type === "User") {
-      $name = $row_find["name"];
-      checkGet("ques");
-      $ques = $_GET["ques"];
-      check_text($ques, "Security Question");
-      $rec_ques = $row_find["ques"];   
-      qa_check($name, $ques, $rec_ques);
-      checkGet("ans");
-      $ans = $_GET["ans"];
-      check_text($ques, "Security Question Answer");
-      $rec_ans = $row_find["ans"];
-      qa_check($name, $ans, $rec_ans);
-    } else {
-      echo_info($row_find);
-    }
-  }
-
-  function qa_check($name, $ans, $rec) {
-    if ($ans !== $rec) {
-      $mess = "Error: Existed User $name, but Incorrect Security Q&A.";
-      rep_err($mess);
-    }
-  }
-
-  /** 
-   * Return and search single food in local table,
-   * check if food info is NULL before searching,
-   * report error for any NULL food info.
-   * @param {PDO} $db - a PDO of food database
-   * @return {object} a JSON object of found rows
-   */
-  function search_single($db) {
-    checkGet("name");
-    $name = strtolower($_GET["name"]);
+  function food_delete_post() {
+    check_post("name");
+    $name = $_POST["name"];
     check_text($name, "Food Name");
-    return find_my_food($db, $name);
+    item_exist_check($name, "Food", false);
+    delete_my_food(array("name" => $name));
   }
 
   /**
-   * Return and search food with multiple filters by sql.
-   * @param {PDO} $db - a PDO of food database
-   * @return {object} a JSON object of found rows
+   * Check food existence and print out existed food info,
+   * report error for unknown food, or invalid food info.
    */
-  function search_multi($db) {
+  function food_ssearch_post() {
+    check_post("name");
+    $name = $_POST["name"];
+    check_text($name, "Food Name");
+    $row = item_exist_check($name, "Food", false);
+    echo_info($row);
+  }
+
+  /**
+   * Check food existence and print out existed food info,
+   * with multiple filters,
+   * report error for no matched food, or invalid food info.
+   */
+  function food_msearch_post() {
     $para = multi_para();
     $table = $para["table"];
     $macro = $para["macro"];
     $maorder = $para["maorder"];
     $micro = $para["micro"];
     $miorder = $para["miorder"];
+    $key = $para["key"];
     $sql = select_multi($para["micro"]) .
            "FROM $table\n" .
            "WHERE nf_calories <= :max\n" .
@@ -286,7 +161,188 @@
            "AND (item_name LIKE :key OR nf_ingredient_statement LIKE :key)\n" .
            "ORDER BY $macro $maorder, $micro $miorder\n" .
            "LIMIT :show;";
-    return find_prof_food($db, $sql, $para);
+    $row = find_prof_food($sql, $para);
+    if (!$row) {
+      $key = str_replace("%", "", $key);
+      $err = "No Matched Food with '$key' in $table Table.";
+      rep_err($err);
+    } else {
+      echo_info($row);
+    }
+  }
+
+  /**
+   * Check parameters for the given mode.
+   * @param {string} $mode - a string represents a mode
+   */
+  function user_target_check($mode) {
+    if ($mode === "reg") {
+      user_reg_post();
+    } else if ($mode === "log") {
+      user_log_post();
+    } else if ($mode === "search") {
+      user_search_post();
+    } else if ($mode === "update") {
+      user_update_post();
+    } else { // mode = delete
+      user_delete_post();
+    } 
+  }
+
+  /**
+   * Check user account info validity, return it in an array,
+   * report error for invalid user info.
+   * @param {array} $para - an array of user info
+   * @return {array} $para - an array of user account info
+   */
+  function user_acc_check($para) {
+    check_post("name");
+    check_post("pass");
+    $name = $_POST["name"];
+    $pass = $_POST["pass"];
+    check_text($name, "Username");
+    check_text($pass, "Password");
+    $para["name"] = $name;
+    $para["pass"] = $pass;
+    return $para;
+  }
+
+  /**
+   * Check user security info validity, return it in an array,
+   * report error for invalid user info.
+   * @param {array} $para - an array of user info
+   * @return {array} $para - an array of user security info
+   */
+  function user_qa_check($para) {
+    check_post("ques");
+    check_post("ans");
+    $ques = $_POST["ques"];
+    $ans = $_POST["ans"];
+    check_text($ques, "Security Question");
+    check_text($ans, "Security Question Answer");
+    $para["ques"] = $ques;
+    $para["ans"] = $ans;
+    return $para;
+  }
+
+  /**
+   * Check user info validity, insert user info into user table.
+   * report error for invalid or unknown user info.
+   */
+  function user_reg_post() {
+    $para = array();
+    $para = user_acc_check($para);
+    $para = user_qa_check($para);
+    $name = $para["name"];
+    item_exist_check($name, "User", true);
+    insert_my_user($para);
+  }
+
+  /**
+   * Check user info validity, log in user.
+   * report error for invalid or unknown or no matched user info.
+   */
+  function user_log_post() {
+    $para = array();
+    $para = user_acc_check($para);
+    $row_find = find_my_user($para["name"]);
+    log_check($row_find, $para);
+  }
+
+  /**
+   * Check user info validity, delete user info from user table.
+   * report error for invalid, unknown or no matched user info.
+   */
+  function user_delete_post() {
+    $para = array();
+    $para = user_acc_check($para);
+    $name = $para["name"];
+    $pass = $para["pass"];
+    $row = item_exist_check($name, "User", false);
+    if ($row["pass"] !== $pass) {
+      $err = "Incorrect Password, Cannot Validate Your Identity.";
+      rep_err($err);   
+    }
+    delete_my_user($para);
+  }
+
+  /**
+   * Check item info existence with the given name in the given type table,
+   * return existed item info in an array.
+   * report error for searching unknown item or 
+   * inserting existed item in the given table.
+   * @param {string} $name - a string represents the item name
+   * @param {string} $type - a string represents the item table type
+   * @param {boolean} $insert - true to insert the given item in the given table,
+   *                            false to search the given item in the given table
+   * @return {array} an array of existed item info
+   */
+  function item_exist_check($name, $type, $insert) {
+    $row = NULL;
+    if ($type === "User") {
+      $row = find_my_user($name);
+    } else {
+      $row = find_my_food($name);
+    }
+    if (!$row && !$insert) {
+      $err = "Unknown $type '$name' in $type Table.";
+      rep_err($err);
+    } else if ($row && $insert) {
+      if ($type === "Food") {
+        echo_info($row);
+      }
+      $err = "Existed $type '$name' in $type Table.";
+      rep_err($err);
+    }
+    return $row;
+  }
+
+  /**
+   * Check user info validity, update user info from user table,
+   * report error for invalid or unknown user info.
+   */
+  function user_update_post() {
+    $para = array();
+    $para = user_acc_check($para);
+    $para = user_qa_check($para);
+    $name = $para["name"];
+    item_exist_check($name, "User", false); 
+    update_my_user($para);
+  }
+
+  /**
+   * Check user info validity, search user info from user table,
+   * with valid security question and answer,
+   * report error for invalid or unknown or not matched user info.
+   */
+  function user_search_post() {
+    check_post("name");
+    $name = $_POST["name"];
+    check_text($name, "Username");
+    $para = array("name" => $name);
+    $para = user_qa_check($para);
+    $row = item_exist_check($name, "User", false); 
+    $rec_ques = $row["ques"];
+    $rec_ans = $row["ans"];   
+    qa_check($name, $para["ques"], $rec_ques);
+    qa_check($name, $para["ans"], $rec_ans);
+    $ok = "Valid Security QA, use Update for your new User Password.";
+    rep_ok($ok);
+  }
+
+  /**
+   * Check security question and answer validty,
+   * compare the given answer and recorded answer,
+   * report error for not matched user security question or answer.
+   * @param {string} $name - a string represents the user name
+   * @param {string} $ans - a string represents the user answer
+   * @param {string} $rec - a string represents the user recorded answer
+   */
+  function qa_check($name, $ans, $rec) {
+    if ($ans !== $rec) {
+      $err = "Existed User '$name', but Incorrect Security Q&A.";
+      rep_err($err);
+    }
   }
 
   /**
@@ -296,22 +352,21 @@
    */
   function multi_para() {
     multi_check();
-    $table = $_GET["table"];
-    table_check($table);
-    $show = (int)$_GET["show"];
-    $macro = $_GET["macro"];
-    macro_check($macro);
-    $maorder = $_GET["maorder"];
+    $table = $_POST["table"];
+    $show = (int)$_POST["show"];
+    $macro = $_POST["macro"];
+    $maorder = strtolower($_POST["maorder"]);
+    $micro = $_POST["micro"];
+    $miorder = strtolower($_POST["miorder"]);
+    $min = (int)$_POST["min"];
+    $max = (int)$_POST["max"];
+    $key = "%" . strtolower($_POST["key"]) . "%";
+    table_check($table);  
+    macro_check($macro); 
     order_check($maorder);
-    $micro = $_GET["micro"];
-    micro_check($micro);
-    $miorder = $_GET["miorder"];
-    order_check($miorder);
-    $min = (int)$_GET["min"];
-    $max = (int)$_GET["max"];
-    $key = "%" . $_GET["key"] . "%";
-    
-    $para = array("table" => $table,
+    micro_check($micro);  
+    order_check($miorder);    
+    return array("table" => $table,
                   "key" => $key,
                   "macro" => $macro,
                   "maorder" => $maorder,
@@ -320,7 +375,6 @@
                   "max" => $max,
                   "min" => $min,
                   "show" => $show);
-    return $para;
   }
 
   /**
@@ -331,24 +385,14 @@
    */
   function ele_check($arr, $ele) {
     if (!in_array($ele, $arr)) {
-      $mess = "PHP Error: Invalid Parameter, must be ";
+      $err = "[PHP] Invalid Parameter, must be ";
       foreach ($arr as $each) {
-        $mess .= "{$each}/";
+        $err .= "{$each}/";
       }
-      $mess = trim($mess, "/");
-      $mess .= ".";
-      rep_err($mess);
+      $err = trim($err, "/");
+      $err .= ".";
+      rep_err($err);
     }
-  }
-
-  function update_type_check($type) {
-    $type_arr = array("user", "food");
-    ele_check($type_arr, $type);
-  }
-
-  function search_type_check($type) {
-    $type_arr = array("user", "single", "multi");
-    ele_check($type_arr, $type);
   }
 
   /**
@@ -361,9 +405,19 @@
     ele_check($table_arr, $table);
   }
 
-  function mode_check($mode) {
-    $mode_arr = array("log", "reg", "update", "search");
+  function user_mode_check($mode) {
+    $mode_arr = array("log", "reg", "update", "search", "delete");
     ele_check($mode_arr, $mode);
+  }
+
+  function food_mode_check($mode) {
+    $mode_arr = array("add", "update", "delete", "ssearch", "msearch");
+    ele_check($mode_arr, $mode);
+  }
+
+  function base_check($base) {
+    $base_arr = array("food", "user");
+    ele_check($base_arr, $base);
   }
 
   /**
@@ -403,15 +457,15 @@
    * report error for any NULL parameter.
    */
   function multi_check() {
-    checkGet("table");
-    checkGet("show");
-    checkGet("macro");
-    checkGet("maorder");
-    checkGet("micro");
-    checkGet("miorder");
-    checkGet("min");
-    checkGet("max");
-    checkGet("key");
+    check_post("table");
+    check_post("show");
+    check_post("macro");
+    check_post("maorder");
+    check_post("micro");
+    check_post("miorder");
+    check_post("min");
+    check_post("max");
+    check_post("key");
   }
 
   /**
@@ -448,91 +502,15 @@
   }
 
   /**
-   * Check if the user name or user password is NULL,
-   * report error if any is NULL,
-   * find if the user name exists,
-   * report error if it exists,
-   * insert new account into User table,
-   * report error if it fails.
+   * Check POST variable validity,
+   * report error for invalid POST with the given name.
+   * @param {string} $name - a string represents POST variable name
    */
-  function reg_post() {
-    $db = get_PDO();
-    $db->setAttribute(PDO::ATTR_ERRMODE,
-                      PDO::ERRMODE_EXCEPTION);
-    checkPost("name");
-    checkPost("pass");
-    checkPost("ques");
-    checkPost("ans");
-    $name = $_POST["name"];
-    $pass = $_POST["pass"];
-    $ques = $_POST["ques"];
-    $ans = $_POST["ans"];
-    check_text($name, "Username");
-    check_text($pass, "Password");
-    check_text($ques, "Security Question");
-    check_text($ans, "Security Question Answer");
-    $row_find = find_my_user($db, $name);
-    $para = array("name" => $name,
-                  "pass" => $pass,
-                  "ques" => $ques,
-                  "ans" => $ans);
-    reg_check($db, $row_find, $para);
-  }
-
-  /**
-   * Check if the user name exists,
-   * report error if it exists,
-   * insert new account into User table,
-   * report error if it fails.
-   * @param {PDO} $db - a PDO of food database
-   * @param {array} $row_find - an array of found rows
-   * @param {string} $name - a string represents user name
-   * @param {string} $pass - a string represents user password
-   */
-  function reg_check($db, $row_find, $para) {
-    if ($row_find) {
-      $name = $para["name"];
-      $mess = "Error: Existed Username '$name'.";
-      rep_err($mess);
-    } else {
-      insert_my_user($db, $para);
-    }
-  }
-
-  function checkPost($name) {
+  function check_post($name) {
     if (!isset($_POST[$name])) {
-      $mess = para_err("POST ") . "{$name}.\n";
-      rep_err($mess);
+      $err = para_err("POST ") . "{$name}.\n";
+      rep_err($err);
     }
-  }
-
-  function checkGet($name) {
-    if (!isset($_GET[$name])) {
-      $mess = para_err("GET ") . "{$name}.\n";
-      rep_err($mess);
-    }
-  }
-
-  /**
-   * Check if the user name or password is NULL,
-   * report error if any is NULL,
-   * find the user input account,
-   * if it exists, check if the existed password matches,
-   * report error if it fails,
-   * report error for unknown user name.
-   */
-  function log_get() {
-    $db = get_PDO();
-    $db->setAttribute(PDO::ATTR_ERRMODE,
-                      PDO::ERRMODE_EXCEPTION);
-    checkGet("name");
-    $name = $_GET["name"];
-    checkGet("pass");
-    $pass = $_GET["pass"];
-    check_text($name, "Username");
-    check_text($pass, "Password");
-    $row_find = find_my_user($db, $name);
-    log_check($row_find, $name, $pass);
   }
 
   /**
@@ -541,21 +519,21 @@
    * print out success if it matches, 
    * report error if it fails,
    * report error for unknown user name.
-   * @param {array} $row_find - an array of found rows
+   * @param {array} $row - an array of found rows
    * @param {string} $name - a string represents user name
    * @param {string} $pass - a string represents user password
    */
-  function log_check($row_find, $name, $pass) {
-    if (!$row_find) {
-      $mess = "Error: Unknown Username '$name'.";
-      rep_err($mess);
-    } else if ($row_find["pass"] === $pass) {
-      $mess = "Success: Logged in.";
-      rep_ok($mess);
+  function log_check($row, $para) {
+    $name = $para["name"];
+    $pass = $para["pass"];
+    $row = item_exist_check($name, "User", false);
+    if ($row["pass"] === $pass) {
+      $ok = "Logged in.";
+      rep_ok($ok);
     } else {
-      $mess = "Error: Existed Username '$name' " .
-              "but Invalid Password '$pass'.";
-      rep_err($mess);
+      $err = "Existed Username '$name' " .
+             "but Invalid Password '$pass'.";
+      rep_err($err);
     }
   }
 ?>
