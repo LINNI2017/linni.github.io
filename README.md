@@ -1,4 +1,4 @@
-# Websites (Recommend to Open with Chrome)
+# Websites (Chrome)
 
 ## Meal Plan
 http://linni2017.github.io/linni.github.io/Meal-Plan/index.html
