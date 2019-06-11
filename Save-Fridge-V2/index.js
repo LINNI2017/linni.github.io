@@ -94,7 +94,7 @@
     let data =  new FormData();
     data.append("base", "food");
     data.append("mode", "delete");
-    data.append("name", inputValue("food-up-name"));
+    data.append("name", id("food-up-name").value);
     let url = BASE_URL;
     fetch(url, {method: "POST", body: data})
       .then(getResponse)
@@ -106,8 +106,8 @@
     let data =  new FormData();
     data.append("base", "user");
     data.append("mode", "delete");
-    data.append("name", inputValue("delete-user-name"));
-    data.append("pass", inputValue("delete-user-pass"));
+    data.append("name", id("delete-user-name").value);
+    data.append("pass", id("delete-user-pass").value);
     let url = BASE_URL;
     fetch(url, {method: "POST", body: data})
       .then(getResponse)
@@ -118,7 +118,7 @@
 
   function secuInput() {
     let iden = this.id;
-    let opt = optValue(iden);
+    let opt = id(iden).value;
     let div = "-secu-ans";
     let label = "-secu-ans label";
     if (iden.includes("reg")) {
@@ -239,11 +239,11 @@
     let data =  new FormData();
     data.append("base", "user");
     data.append("mode", "search");
-    data.append("name", inputValue("forget-user-name"));
-    let ques = optValue("forget-secu-ques");
+    data.append("name", id("forget-user-name").value);
+    let ques = id("forget-secu-ques").value;
     if (quesCheck(ques)) {
       data.append("ques", ques);
-      data.append("ans", inputValue("forget_" + ques));
+      data.append("ans", id("forget_" + ques).value);
       let url = BASE_URL;
       fetch(url, {method: "POST", body: data})
         .then(getResponse)
@@ -266,22 +266,22 @@
   function resetFetch() {
     let para = [];
     para["mode"] = "update";
-    para["name"] = inputValue("forget-user-name");
-    para["pass"] = inputValue("forget-user-pass");
-    para["ques"] = optValue("forget-secu-ques");
-    para["ans"] = inputValue("forget_" + para["ques"]);
+    para["name"] = id("forget-user-name").value;
+    para["pass"] = id("forget-user-pass").value;
+    para["ques"] = id("forget-secu-ques").value;
+    para["ans"] = id("forget_" + para["ques"]).value;
     regFetch(para);
   }
 
   function regPara() {
     let para = [];
     para["mode"] = "reg";
-    para["name"] = inputValue("user-name");
-    para["pass"] = inputValue("user-pass");
-    para["ques"] = optValue("reg-secu-ques");
+    para["name"] = id("user-name").value;
+    para["pass"] = id("user-pass").value;
+    para["ques"] = id("reg-secu-ques").value;
     let ques = para["ques"];
     if (quesCheck(ques)) {
-      para["ans"] = inputValue("reg_" + ques);
+      para["ans"] = id("reg_" + ques).value;
       regFetch(para);
     }
   }
@@ -396,15 +396,15 @@
    */
   function multiData() {
     let data =  new FormData();
-    let show = inputValue("multi-show");
-    let min = inputValue("multi-cal-min");
-    let max = inputValue("multi-cal-max");
-    let key = inputValue("multi-key");
-    let table = optValue("multi-type");
-    let macro = optValue("multi-macro");
-    let maorder = optValue("macro-order");
-    let micro = optValue("multi-micro");
-    let miorder = optValue("micro-order");
+    let show = id("multi-show").value;
+    let min = id("multi-cal-min").value;
+    let max = id("multi-cal-max").value;
+    let key = id("multi-key").value;
+    let table = id("multi-type").value;
+    let macro = id("multi-macro").value;
+    let maorder = id("macro-order").value;
+    let micro = id("multi-micro").value;
+    let miorder = id("micro-order").value;
     data.append("base", "food");
     data.append("mode", "msearch");
     data.append("table", table);
@@ -477,26 +477,6 @@
       table.appendChild(tr);
     }
     id("food-multi-search-result").appendChild(table);
-  }
-
-  /**
-   * Return the given selector's selected option value.
-   * @param {string} select - a string represents a selector
-   * @return {string} a string represents selected option value
-   */
-  function optValue(select) {
-    let opt = id(select);
-    return opt.options[opt.selectedIndex].value;
-  }
-
-  /**
-   * Return the given selector's input value.
-   * @param {string} select - a string represents a selector
-   * @return {string} a string represents input value
-   */
-  function inputValue(select) {
-    let input = id(select);
-    return input.value;
   }
 
   /**
