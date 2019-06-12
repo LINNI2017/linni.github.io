@@ -1,5 +1,7 @@
 /*
+    Name: LINNI CAI
     Date: May 4, 2019
+    Section: CSE 154 AO
 
     This is the set.css for styles in index.html of potato choice,
     including some css techniques.
@@ -15,7 +17,8 @@ body {
   background-blend-mode: lighten;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 100%; 
+  background-size: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 header {
@@ -33,11 +36,11 @@ main * {
 
 footer * {
   color: white;
-  font-size: 0.5em;
+  font-size: 1em;
 }
 
 footer {
-  margin-top: 10em;
+  margin-top: 24em;
 }
 
 button {
@@ -82,7 +85,7 @@ button {
 
 #response section {
   margin-bottom: 5pt;
- justify-content: center;
+  justify-content: center;
 }
 
 hr {
