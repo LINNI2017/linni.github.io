@@ -86,6 +86,11 @@
     id("user-main").classList.add("hidden");
     id("delete-acc").classList.remove("hidden");
     id("delete-btn-bar").classList.remove("hidden");
+    let labels = qsa("#delete-acc label");
+    for (let i = 0; i < labels.length; i++) {
+      let label = labels[i];
+      label.classList.remove("hidden");
+    }
   }
 
   function deleteFoodFetch() {
