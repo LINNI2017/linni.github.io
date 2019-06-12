@@ -1,8 +1,6 @@
 <?php
   /**
-   * Name: LINNI CAI
    * Date: June 6, 2019
-   * Section: CSE 154 AO
    * This is the common.php for food.php, share SQL and report functions.
    */
 

@@ -1,6 +1,4 @@
--- Name: LINNI CAI
 -- Date: June 1, 2019
--- Section: CSE 154 AO
 -- This is the more-inserts.sql file for fooddb.
 -- Use it to import to phpMyAdmin,
 -- and insert values to tables for myfood, myuser,

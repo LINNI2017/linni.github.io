@@ -1,8 +1,6 @@
 <?php
 /*
- * Name: LINNI CAI
  * Date: June 6, 2019
- * Section: CSE 154 AO
  * This is the food.php web service to demonstrate basic POST parameter. 
  * API to search user account and food data.
  *

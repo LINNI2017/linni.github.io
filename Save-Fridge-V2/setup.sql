@@ -1,6 +1,4 @@
--- Name: LINNI CAI
 -- Date: June 1, 2019
--- Section: CSE 154 AO
 -- This is the setup.sql file for fooddb.
 -- Use it to import to phpMyAdmin,
 -- and create tables for myfood, myuser,

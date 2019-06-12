@@ -1,7 +1,5 @@
 /**
- * Name: LINNI CAI
  * Date: June 5, 2019
- * Section: CSE 154 AO
  * This is the JS to implement the UI for save fridge web page.
  * Allow users to login existed account and register new account.
  * After login successfully,
