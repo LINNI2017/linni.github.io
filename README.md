@@ -13,7 +13,8 @@ https://courses.cs.washington.edu/courses/cse154/19sp/creative/cp4/beau/index.ht
 #### (web server file storage) [Requires UW netid]
 
 ## Save Fridge (Food Database API V2)
-http://savefridge.epizy.com/   
+http://savefridge.epizy.com/
+https://courses.cs.washington.edu/courses/cse154/19sp/creative/cp5/black-sesame/index.html
 #### (web server database storage) [SQL, PDO, USDA food table and personal edit table]   
    
 `safari doesn't support some features`
