@@ -1,11 +1,10 @@
 /**
- * Date: June 5, 2019
+ * Date: June 12, 2019
  * This is the JS to implement the UI for save fridge web page.
  * Allow users to login existed account and register new account.
- * After login successfully,
- * calculate and show calories for users food input,
- * give food comment and info,
- * or update food database.
+ * After login successfully, calculate and show calories for users food input,
+ * give food comment and info, update/delete food in local food database,
+ * search food with filters in usda food database.
  */
 
 (function() {
@@ -75,6 +74,16 @@
     id("delete-submit-btn").addEventListener("click", deleteUserFetch);
     id("delete-back-btn").addEventListener("click", userView);
     id("food-up-delete-btn").addEventListener("click", deleteFoodFetch);
+    id("tog-pass").addEventListener("click", togPass);
+  }
+
+  function togPass() {
+    let pass = id("user-pass");
+    if (id("tog-pass").checked == true) {
+      pass.type = "text";
+    } else {
+      pass.type = "password";
+    }
   }
 
   function deleteView() {
@@ -175,7 +184,7 @@
    * and initialize log-in and register form.
    */
   function userView() {
-    cleanRec("user-mess");
+    cleanAcc();
     hideAll(".bar", true);
     id("log-out").classList.add("hidden");
     id("food-main").classList.add("hidden");
@@ -198,6 +207,14 @@
     id("user-main").classList.remove("hidden");
   }
 
+  function cleanAcc() {
+    cleanRec("user-mess");
+    id("tog-pass").checked = false;
+    id("user-name").value = "";
+    id("user-pass").value = "";
+    id("user-pass").type = "password";
+  }
+
   /**
    * Toggle log-in and register view by the given boolean,
    * true for log-in view, false for register view.
@@ -205,15 +222,13 @@
    *                        true for log-in, false for register.
    */
   function logReg(log) {
+    cleanAcc();
     id("user-main-btn-bar").classList.remove("hidden");
     id("user-main-bar").classList.replace("width-40", "width-29");
     id("user-main-input").classList.remove("hidden");
     id("title").classList.add("small-title");
     id("user-main-bar").classList.remove("big-btn");
     id("user-main-bar").classList.add("small-btn");
-    id("user-name").value = "";
-    id("user-pass").value = "";
-    cleanRec("user-mess");
     id("reg-secu-ques").selectedIndex = 0;
     hideAll("#reg-secu-ans *", true);
     let ques = qsa("#reg-secu-ans input");
@@ -235,6 +250,15 @@
       id("reg-submit").classList.remove("hidden");
       id("reg-secu-ques-div").classList.remove("hidden");
     }
+  }
+
+  function togUser(hide) {
+    id("log-submit").classList.toggle("hidden", !hide);
+    id("reg-submit").classList.toggle("hidden", hide);
+    id("forget-pass-btn").classList.toggle("hidden", !hide);
+    id("delete-acc-btn").classList.toggle("hidden", hide);
+    id("reg-secu-ques-div").classList.toggle("hidden", hide);
+    id("reg-secu-ans").classList.toggle("hidden", hide);
   }
 
   function forgetFetch() {

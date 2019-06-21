@@ -18,6 +18,12 @@
     $password = "root"; # fill in with password (will be different mac/pc)
     $dbname = "fooddb";   # fill in with db name containing your SQL tables
 
+    // $host = "sql105.epizy.com";
+    // $port = "3306";
+    // $user = "epiz_23983084";
+    // $password = "TzlVxdkRaSocj";
+    // $dbname = "epiz_23983084_fooddb";
+
     # Make a data source string that will be used in creating the PDO object
     $ds = "mysql:host={$host}:{$port};dbname={$dbname};charset=utf8";
 

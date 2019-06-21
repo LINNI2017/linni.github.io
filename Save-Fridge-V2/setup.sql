@@ -1,4 +1,4 @@
--- Date: June 1, 2019
+-- Date: June 12, 2019
 -- This is the setup.sql file for fooddb.
 -- Use it to import to phpMyAdmin,
 -- and create tables for myfood, myuser,
@@ -28,6 +28,8 @@ CREATE TABLE MyUser (
 	id INT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
 	pass VARCHAR(255) NOT NULL,
+  ques VARCHAR(255) NOT NULL,
+  ans VARCHAR(255) NOT NULL,
 	PRIMARY KEY(id)
 );
 

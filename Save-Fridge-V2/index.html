@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-     Date: June 5, 2019
+     Date: June 12, 2019
      This is the index.html for save fridge web page.
      It includes login, register, food nutrient search, 
      food database update, calories calculation.
@@ -41,10 +41,12 @@
             <input type="text" id="user-name" name="name" required/>
           </div>
 
-          <div>
+          <div id="user-pass-div">
             <label for="user-pass">Password </label>
-            <input type="text" id="user-pass" name="pass" required/>
-          </div>
+            <input type="password" id="user-pass" name="pass" required/> 
+            <input type="checkbox" id="tog-pass"> 
+          </div>      
+
           <div id="reg-secu-ques-div" class="hidden">
             <label for="reg-secu-ques">Question </label>
             <select id="reg-secu-ques">
@@ -455,22 +457,21 @@
 
     <footer>
       <article>
-        <h3>Note:</h3>
+        <h3>Note + Reference:</h3>
         <p>
-          Use Chrome to have optimal page view (scale: 100%).
+          Created @ LINNI, notes and other sources cited below.
+        </p>
+        
+        <p>
+          Please use <a href="https://www.google.com/chrome/">Chrome</a> to have optimal page view (scale: 100%).
         </p>
         <p>
-          For each recorded food, default weight is 100g and calories per 100g. Use + to add more food.
-        </p>
-      </article>
-      <article>
-        <h3>Reference:</h3>
-        <p>
-          Created @ LINNI, other sources cited below.
+          For each food, default weight is 100g and calories per 100g. Use + to add.
         </p>
         <p>
-          The fonts of this page can be found via <a href="https://fonts.google.com/">
-            Google Font </a>.
+          The fonts of this website can be found via <a href="https://fonts.google.com/">
+            Google Font</a>, is <a href="https://creativecommons.org/licenses/by/2.0/">
+          licensed under CC BY 2.0</a>.
         </p>
         <p>
           Alpaca Emoji can be found at <a href="http://sc.chinaz.com/biaoqing/121202335870.htm">

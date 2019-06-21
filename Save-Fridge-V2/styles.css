@@ -300,3 +300,22 @@ select {
   font-size: 1em;
   margin: 0;
 }
+
+#user-pass-div {
+  margin-left: 21.4%;
+}
+
+#user-pass-div input {
+  width: 25.5%;
+}
+
+#user-pass-div div {
+  display: inline;
+}
+
+#show-pass {
+  margin: 0;
+  width: 10px;
+  height: 15px;
+  background-color: white;
+}

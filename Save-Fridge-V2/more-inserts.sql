@@ -1,4 +1,4 @@
--- Date: June 1, 2019
+-- Date: June 12, 2019
 -- This is the more-inserts.sql file for fooddb.
 -- Use it to import to phpMyAdmin,
 -- and insert values to tables for myfood, myuser,
@@ -79,14 +79,14 @@ VALUES
   ('cherry', 'fruit & summer desert', '63.0'),
   ('cherries', 'fruit & summer desert', '63.0');
 
-INSERT INTO MyUser (name, pass) 
+INSERT INTO MyUser (name, pass, ques, ans) 
 VALUES 
-  ("aaa", "123"),
-  ("bbb", "123"),
-  ("ccc", "123"),
-  ("aaaa", "1234"),
-  ("apple", "aaa"),
-  ("tester1", "aaa");
+  ("aaa", "123", "favor_city", "Ningbo"),
+  ("bbb", "123", "favor_class", "CSE154"),
+  ("ccc", "123", "favor_flavor", "Chocolate"),
+  ("aaaa", "1234", "favor_char", "Pikachu"),
+  ("apple", "aaa", "favor_city", "Shanghai"),
+  ("tester1", "aaa", "favor_city", "Seattle");
 
 INSERT INTO Restaurant (id, brand_name, item_name, brand_id, item_id, upc, item_type, item_description, nf_ingredient_statement, nf_calories, nf_calories_from_fat, nf_total_fat, nf_saturated_fat, nf_trans_fatty_acid, nf_polyunsaturated_fat, nf_monounsaturated_fat, nf_cholesterol, nf_sodium, nf_total_carbohydrate, nf_dietary_fiber, nf_sugars, nf_protein, nf_vitamin_a_dv, nf_vitamin_c_dv, nf_calcium_dv, nf_iron_dv, nf_potassium, nf_servings_per_container, nf_serving_size_qty, nf_serving_size_unit, nf_serving_weight_grams, images_front_full_url, updated_at, section_id) VALUES
 (1, '4food', 'melgalllll Sandwich', '521b95454a56d006cae29a98', '53444ea3bbe33514459806d1', NULL, 1, 'BUILDBOARD - melgalllll Sandwich', NULL, '319.00', NULL, '3.50', '0.40', '0.00', NULL, NULL, '0.00', '298.00', '57.70', '12.60', '8.80', '16.70', '486.00', '25.00', '11.00', '24.00', NULL, NULL, '1.00', 'sandwich', NULL, NULL, '2014-12-30T08:20:00+00:00', '24708'),
