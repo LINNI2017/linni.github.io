@@ -77,6 +77,9 @@
     id("tog-pass").addEventListener("click", togPass);
   }
 
+  /**
+   * Toggle the view of password, visible or hidden.
+   */
   function togPass() {
     let pass = id("user-pass");
     if (id("tog-pass").checked == true) {
@@ -86,6 +89,9 @@
     }
   }
 
+  /**
+   * Display delete view, allow users to delete account with valid user info.
+   */
   function deleteView() {
     cleanRec("user-mess");
     id("delete-user-name").value = "";
@@ -100,6 +106,9 @@
     }
   }
 
+  /**
+   * Fetch the response from api, use POST info to delete food in the database.
+   */
   function deleteFoodFetch() {
     cleanRec("food-update-result");
     id("food-update-result").classList.add("hidden");
@@ -114,6 +123,9 @@
       .catch(requestErr);
   }
 
+  /**
+   * Fetch the response from api, use POST info to delete user in the database.
+   */
   function deleteUserFetch() {
     let data =  new FormData();
     data.append("base", "user");
@@ -128,6 +140,10 @@
       .catch(requestErr);
   }
 
+  /**
+   * Display security question and answer box to type in,
+   * clean previous records,
+   */
   function secuInput() {
     let iden = this.id;
     let opt = id(iden).value;
@@ -154,6 +170,9 @@
     }
   }
 
+  /**
+   * Display forget view, allow users to reset password with valid user info.
+   */
   function forgetView() {
     cleanRec("user-mess");
     id("forget-secu-ques").selectedIndex = 0;
@@ -173,6 +192,12 @@
     id("forget-pass").classList.remove("hidden");
   }
 
+  /**
+   * Display or hide the given selector's children.
+   * @param {string} select - a string represents a selector.
+   * @param {boolean} hide - true to hide the given selector's children,
+   *                         false to display the given selector's children.
+   */
   function hideAll(select, hide) {
     qsa(select).forEach(function(e) {
       e.classList.toggle("hidden", hide);
@@ -207,6 +232,9 @@
     id("user-main").classList.remove("hidden");
   }
 
+  /**
+   * Clean previous account record, and set password securely display.
+   */
   function cleanAcc() {
     cleanRec("user-mess");
     id("tog-pass").checked = false;
@@ -252,6 +280,12 @@
     }
   }
 
+  /**
+   * Display log-in view if given hide true,
+   * display register view if given hide false.
+   * @param {boolean} hide - true to display log-in view,
+   *                         false to display register view
+   */
   function togUser(hide) {
     id("log-submit").classList.toggle("hidden", !hide);
     id("reg-submit").classList.toggle("hidden", hide);
@@ -261,6 +295,11 @@
     id("reg-secu-ans").classList.toggle("hidden", hide);
   }
 
+  /**
+   * Fetch the response from api, use POST info to find existed user info,
+   * display reset view for valid and matched user security question and answer,
+   * otherwise display error message.
+   */
   function forgetFetch() {
     id("forget-user-name").disabled = true;
     let data =  new FormData();
@@ -280,6 +319,14 @@
     }
   }
 
+  /**
+   * Check user selected security question, 
+   * return true with valid selected security question,
+   * otherwise return false and display error message 
+   * with invalid selected security question.
+   * @param {string} ques - a string represents a security question
+   * @return {boolean} true for a valid security question, false otherwise
+   */
   function quesCheck(ques) {
     if (ques.includes("ques-def")) {
       let mess = "Error: Select One Security Question.\n";
@@ -290,6 +337,9 @@
     return true;
   }
 
+  /**
+   * Fetch result for reset account info.
+   */
   function resetFetch() {
     let para = [];
     para["mode"] = "update";
@@ -300,6 +350,10 @@
     regFetch(para);
   }
 
+  /**
+   * Get parameters for register mode, 
+   * check validity of security question and answer.
+   */
   function regPara() {
     let para = [];
     para["mode"] = "reg";
@@ -334,6 +388,9 @@
       .catch(requestErr);
   }
 
+  /**
+   * Display view for reset password.
+   */
   function resetView() {
     hideAll(".reset-user-pass", false);
     id("forget-submit-btn").classList.add("hidden");
