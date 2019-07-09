@@ -1,6 +1,6 @@
 .heatmap {
   background-image: url("floor.jpg");
-  background-size: 70%;
+  background-size: 85%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 500px; 
@@ -10,8 +10,8 @@
 
 .legend {
 	position: absolute;
-  bottom: 23%;
-  right: 31.2%;
+  top: 2%;
+  left: 2%;
   font-size: 18px;
   border: none;
   padding: 8px;
@@ -20,7 +20,8 @@
 .demo-wrapper {
 	margin-top: 0em;
 	margin-left: 0em;
-	margin-right: 36em;
+	margin-right: 13em;
+	margin-bottom: 0em;
 	height: 850px; 
 	background: rgba(0,0,0,.03); 
 	border: 3px solid black; 

@@ -67,16 +67,16 @@ demoWrapper.onmouseout = function() {
 
 // generate some data
 var points = [];
-points.push(pt_gen(700, 150, 10));
-points.push(pt_gen(700, 250, 8));
-points.push(pt_gen(700, 350, 6));
-points.push(pt_gen(700, 450, 4));
-points.push(pt_gen(700, 550, 2));
-points.push(pt_gen(900, 150, 9));
-points.push(pt_gen(900, 250, 7));
-points.push(pt_gen(900, 350, 5));
-points.push(pt_gen(900, 450, 3));
-points.push(pt_gen(900, 550, 1));
+points.push(pt_gen(650, 110, 10));
+points.push(pt_gen(650, 210, 8));
+points.push(pt_gen(650, 310, 6));
+points.push(pt_gen(650, 410, 4));
+points.push(pt_gen(650, 510, 2));
+points.push(pt_gen(850, 110, 9));
+points.push(pt_gen(850, 210, 7));
+points.push(pt_gen(850, 310, 5));
+points.push(pt_gen(850, 410, 3));
+points.push(pt_gen(850, 510, 1));
 var data = {
   max: 10,
   min: 0,
