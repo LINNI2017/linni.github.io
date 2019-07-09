@@ -1,0 +1,36 @@
+.heatmap {
+  background-image: url("floor.jpg");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 500px; 
+  width: 700px;
+  margin: auto;
+}
+
+.legend {
+	position: absolute;
+  bottom: 23%;
+  right: 31.2%;
+  font-size: 18px;
+  border: none;
+  padding: 8px;
+}
+
+.demo-wrapper {
+	margin-top: 0em;
+	margin-left: 0em;
+	margin-right: 27em;
+	height: 850px; 
+	background: rgba(0,0,0,.03); 
+	border: 3px solid black; 
+}
+
+.heatmap { 
+	width: 100%; 
+	height: 100%; 
+}
+
+.right {
+	float: right;
+}
