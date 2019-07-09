@@ -1,21 +1,3 @@
-<!-- <!doctype html>
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>D3</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script type="/Users/linni/Desktop/d3/build/heatmap.js"></script>
-  <script src="index.js"></script>
-</head>
-
-<body>
-   <div class="heatmap"></div>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -26,8 +8,13 @@
 	</head>
 	<body>
 		<div class="demo-wrapper">
-			<div class="heatmap"></div>
-			<div class="tooltip"></div>
+			<div class="heatmap">
+				<div class="tooltip">
+				  <span class="tooltiptext"></span>
+				</div>	
+			</div>
+			
+			<!-- <div class="tooltip"></div> -->
 			<div class="legend">
 				<h2>Legend Title</h2>
 	  		<span id="min" class="left"></span>
@@ -35,7 +22,7 @@
 	  		<br>
 		  	<img id="gradient" class="center" src="" style="width:100%"></img>
 			</div>
-		</div>	  
+		</div>  
 	</body>
 	<script src="heatmap.js/build/heatmap.min.js"></script>
 	<script src="index.js"></script>

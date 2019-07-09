@@ -1,7 +1,8 @@
 (function() {
   "use strict";
   document.write("<script type='text/javascript' src='heatmap.js/build/heatmap.min.js'></script>");
-
+  // document.write("<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>");
+  // document.write("<script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>");
 var legendCanvas = document.createElement('canvas');
 legendCanvas.width = 100;
 legendCanvas.height = 10;
